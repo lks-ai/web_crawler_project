@@ -1,0 +1,14 @@
+# Web Crawler Requirements
+requests
+beautifulsoup4
+playwright
+sqlalchemy
+aiosqlite
+fastapi
+uvicorn
+openai
+numpy
+pydantic
+uuid
+concurrent.futures
+sqlmodel
