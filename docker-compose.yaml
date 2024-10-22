@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: web_crawler_api
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    environment:
+      # It's recommended to use a .env file to manage sensitive information
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - db_data:/app/database
+    depends_on:
+      - crawler
+
+  crawler:
+    build: .
+    container_name: web_crawler_crawler
+    command: python crawler/crawler.py
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - db_data:/app/database
+
+volumes:
+  db_data:
+
